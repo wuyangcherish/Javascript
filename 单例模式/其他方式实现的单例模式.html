@@ -8,11 +8,12 @@
         function Universe(args) {
             if(typeof Universe.instance === 'object') {
                 return Universe.instance;
+                
             }
             var args = args || {};
             this.name = args.name||'wuyang';
             this.sex =  args.age||'female' ;
-            
+//            debugger;
             Universe.instance = this; //Univserse.instance 指向该函数的this
             
             //这样就隐式的返回了this
@@ -24,6 +25,18 @@
         console.log(person2.name); //cherish
         console.log(person1 === person2) //true;
         
+        
+        /*
+            通过debugger 差不多搞懂了
+            var person1 的时候： if 语句返回的false s所以 走的是else的路 
+                1. 设置args 的变量
+                2. 返回 this 
+            var person2 的时候： if 语句判断的是 true 所以直接的返回了Universe.instance
+                1. args  参数是改变成了”zxc"   但是没有改变this.name等要返回的参数
+                
+            这也说明了为什么person1 === person2 
+
+        */
     </script>
 </head>
 <body>
