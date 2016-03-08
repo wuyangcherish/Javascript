@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<title>例子2</title>
+<script type="text/javascript">
+    var SingletonTester = (function(){
+            function Singleton(args) {
+            //参数： 传递给单例的参数
+                var args = args || {};
+                
+                //设置参数
+                this.name = 'SingletonTester';
+                this.pointX = args.pointX || 5;
+                this.pointY = args.pointY || 10;
+            }
+            
+            //实例化容器
+            var instance;
+            
+            var _static = {
+                name: "SingletonTester",
+                
+                //获取实例的方法
+                getInstance: function(args){
+                    if(!instance) {
+                        instance = new Singleton(args);
+                    }
+                    return instance;
+                }
+                
+            };
+            return _static;  //返回了_static {object{name/getInatance()}}  
+    })();
+    
+//    var SingleTest = SingletonTester.getInstance({pointX:20});
+//    console.log(SingleTest.pointX);
+    console.log(SingletonTester)
+</script>
+</head>
+<body>
+    
+</body>
+</html>

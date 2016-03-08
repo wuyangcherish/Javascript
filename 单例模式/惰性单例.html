@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>单例模式</title>
+<script type="text/javascript">
+
+	/*
+		惰性单体
+			1. 跟闭包单体类似 不过就是在使用它的时候才初始化这个单体
+	*/
+	var ZXC = {};
+	ZXC.Base = (function(){
+
+		//定义一个初始化的变量
+		var IsInit ; //undefined
+
+		//init  初始化函数
+		function init(){
+			var username = "惰性单体里面的usrname:wuyang";
+			var age = 23;
+			var attr = "hello world";
+			var getName = function() {
+				console.log(username);
+			};
+			var getAge = function() {
+				console.log(age);
+			}
+
+			return {
+				attr: attr,
+				username: username,
+				getInitName: function() {
+					return getName();
+				},
+				getInitAge: function() {
+					return getAge();
+				}
+			};
+
+		}
+
+		return {
+			getIntance: function() {
+				if(!IsInit) {
+					IsInit = init();
+					//console.log(init())
+				}
+				return IsInit;
+			}
+			
+		}
+
+	})();
+
+	console.log(ZXC.Base.getIntance()); //object  init 函数里面的属性和方法
+	console.log(ZXC.Base.getIntance().attr);
+	ZXC.Base.getIntance().getInitName();
+    
+    /*接下来是惰性模式  就是在用的时候才会去初始化*/
+    var Singleton = (function(){
+        var instantiated;
+        //初始化函数
+        function init() {
+            /*定义私有的变量*/
+            var _method = function() {
+                console.log("_method 的hello world~");
+            };
+            var _property = "私有属性";
+            
+            //返回的接口
+            return {
+                publicMethod: function() {
+                    return _method();
+                },
+                publicProperty: _property
+            }
+        }
+        
+        return {
+            getInstance: function() {
+                if(!instantiated) {
+                    instantiated = init();
+                }
+                return instantiated;
+            }
+        };
+    })();
+    
+    //调用共有的方法来获得实例
+    Singleton.getInstance().publicMethod();
+    console.log(Singleton.getInstance().publicProperty);
+
+</script>
+</head>
+<body>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

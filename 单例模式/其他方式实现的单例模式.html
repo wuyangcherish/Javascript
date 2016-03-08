@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>方式1 </title>
+    <script type="text/javascript">
+        //构造函数的形式
+        function Universe(args) {
+            if(typeof Universe.instance === 'object') {
+                return Universe.instance;
+            }
+            var args = args || {};
+            this.name = args.name||'wuyang';
+            this.sex =  args.age||'female' ;
+            
+            Universe.instance = this; //Univserse.instance 指向该函数的this
+            
+            //这样就隐式的返回了this
+        }
+        
+        var person1 = new Universe({name:"cherish"});
+        var person2 = new Universe({name:"zxc"});  //设置无效 永远都会出现的是第一个名字cherish
+        console.log(person1.name); //cherish
+        console.log(person2.name); //cherish
+        console.log(person1 === person2) //true;
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

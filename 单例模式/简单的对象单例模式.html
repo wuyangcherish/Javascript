@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>单例模式</title>
+<script type="text/javascript">
+	/** 第一种简单模式
+		1. 直接写一个对象,然后在对象的里面写一些属性和方法
+		2. 在一个命名空间下面写子集的属性和方法
+	**/
+	//简单的单例模式
+	/*
+		优点： 容易理解好实现
+		缺点：没有自己的私有属性和方法
+	*/
+	var information = {
+		username: "wuyang",
+		age: "23",
+		getName: function() {
+			console.log(this.username);
+		},
+		getAge: function(){
+			console.log(this.age);
+		}
+	}
+	information.getName(); //wuyang
+</script>
+</head>
+<body>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
