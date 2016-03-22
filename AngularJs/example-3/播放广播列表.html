@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-click的点击事件</title>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<style type="text/css">
+    *{font-family: "Microsoft yahei"}
+    button{margin:0;padding:0;}
+    .btn{
+        width:300px;
+        height:50px;
+        line-height: 50px;
+        background: #9dd;
+        color:#fff;
+        font-size: 16px;
+        border:none;
+    }    
+    .showList{
+        
+    }
+</style>
+</head>
+<body>
+    <div class="parent" ng-controller="PlayerController">
+        <h4>Ajax 数据请求: NPR 列表</h4>
+        <ul id="program_list" class="program_list">
+            <li ng-repeat="program in programs">
+                <span npr-link class="showList" play="play(program)" ng-model="program"></span>
+            </li>
+        </ul>
+    </div>
+    
+<script type="text/javascript">
+    var app = angular.module('myApp',[]);
+    
+    var apiKey = 'MDIzMzE0NTkxMDE0NTg1NTM0NDU5NTJhMQ000';
+    var nprUrl = 'http://api.npr.org/query?id=61&fields=relatedLink,title,byline,text,audio,image,pullQuote,all&output=JSON';
+    
+    //自己创建一个模板引擎
+    app.directive('nprLink', function(){
+        return{
+            restrict: "EA",
+            require: ['^ngModel'],
+            replace: true,
+            scope: {
+                ngModel: "=",
+                play: "&"
+            },
+            templateUrl:'nprLink.html',
+            link: function(scope,ele, attr){
+                scope.duration = scope.ngModel.audio[0].duration.$text;
+            }
+        }
+    })
+    
+    //controller
+    app.controller('PlayerController', function($scope, $http){
+        //创建一个audio 
+        var audio = document.createElement('audio');
+        $scope.audio = audio;
+        
+        //http 请求npr 的资源
+        $http({
+            method: 'JSONP',
+            url:  nprUrl + '&apiKey=' + apiKey + '&callback=JSON_CALLBACK'
+        }).success(function(data, status, hearders, config) {
+            console.log(data.list);
+            $scope.programs =data.list.story;
+        }).error(function(data, status, headers, config){
+            console.log(data)
+        });
+        
+        //播放
+        $scope.play = function(program) {
+            if($scope.playing) audio.pause();
+            var url = program.audio[0].format.mp4.$text;
+            audio.src = url;
+            audio.play();
+            
+            $scope.playing = true;
+        }
+        
+
+
+    })
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

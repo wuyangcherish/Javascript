@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>调用githubAPI</title>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+</head>
+<body>
+    <div class="serviceController" ng-controller="ServiceController">
+        <label for="username">Type in a Github username</label>
+        <input type="text" ng-model="username" placeholder="Enter a Github name here" />
+        <pre ng-show="username">{{events}}</pre>
+    </div>
+<script type="text/javascript">
+    var app = angular.module("myApp.service",[]);
+    
+    //定义一个方法【工厂模式】
+//    app.factory('githubService', ['$http', function($http){
+//        var doRequest = function(username, path){
+//            return $http({
+//                method: "JSONP",
+//                url: "https://api.github.com/users/"+username+"/"+path+"?callback=JSON_CALLBACK"
+//            });
+//        }
+//        return {
+//            events: function(username){
+//                return doRequest(username,"events")
+//            }
+//        }
+//    }])
+    
+    app.factory('githubService',['$http', function($http){
+        var githubUsername;
+        var doRequest = function(path){
+            return $http({
+                method: "JSONP",
+                url: 'https://api.github.com/users/' + githubUsername + '/' + path + '?callback=JSON_CALLBACK'
+            });
+        }
+        
+        return {
+            events: function(){return doRequest("events");},
+            setUsername: function(newUsername){
+                githubUsername = newUsername；
+            }
+        }
+    }])
+    
+    //创建controller  加载githubService 作为运行时候的依赖  把service的名字作为参数传递给controller   依赖注入的写法
+    app.controller('ServiceController',['$scope','$timeout','githubService'], function($scope,$timeout, githubService){
+        $scope.$watch('username',function(newVal){
+            if(newVal){
+                if(timeout) $timeout.cancel(timeout);
+                //超时设定
+                timeout = $timeout(function(){
+                    githubService.events(newVal)
+                    .success(function(data,status,headers){
+                        $scope.events = data.data;
+                    })
+                },350)
+            }
+        })
+    })
+    
+    
+    //创建一个单利 audio 而不是放在controller里面
+   app.factory('audio', ['$document', function($document) {
+      var audio = $document[0].createElement('audio');
+      return audio;
+   }]);
+    
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>第一个anguarsjs实例</title>
+<!--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.11/angular2.min.js"></script>-->
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<style type="text/css">
+    *{margin:0;padding:0;font-family:"Microsoft yahei"}
+    .parent{margin:30px auto;width:1000px;}
+    input{
+        width:300px;
+        height:50px;
+        box-sizing: border-box;
+        border:1px solid #9dd;
+        border-radius: 10px;
+        padding:20px;
+    }    
+    .btn {
+        display:inline-block;
+        background-color:#9dd;
+        width:100px;
+        height:50px;
+        color:#fff;
+        font-size: 16px;
+        line-height:50px;
+        text-align: center;
+        text-decoration: none;
+    }
+    .showInfo {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+    <div class="parent" ng-controller="ParentController">
+        <div ng-controller="ChildController">
+            <input type="text" ng-model="person.name" placeholder="Name" />
+            
+            <a href="#" class="btn" ng-click="sayHello()">SayHello</a>
+            <a href="#" class="btn" ng-click="reset()">Reset</a>
+            <p class="showInfo">{{person.name}}</p>
+            <p class="showInfo">显示的是greeted 的值： {{person.greeted}}</p>
+        </div>
+        div.
+    </div>
+</body>
+
+<script type="text/javascript">
+    //定义angularjs的模块
+    var app = angular.module('myApp', []);
+    app.controller('ParentController', function($scope){
+        $scope.person = {
+            greeted: false
+        }
+    });
+    app.controller('ChildController', function($scope){
+        $scope.sayHello = function() {
+            $scope.person.greeted = true
+        };
+        $scope.reset = function() {
+            $scope.person.greeted = false;
+        }
+    })
+</script>
+</html>

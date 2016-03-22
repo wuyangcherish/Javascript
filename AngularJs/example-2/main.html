@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>第2个anguarsjs实例</title>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+</head>
+<body>
+    <div class="parent" ng-controller="myController">
+        <p>通过ng-controller显示的name： {{person.name}}</p>
+        <p>通过ng-controller显示的age： {{person.age}}</p>
+    </div>
+</body>
+
+<script type="text/javascript">
+    //定义angularjs的模块
+    var app = angular.module('myApp', []);
+    app.controller('myController',function($scope){
+        $scope.person = {
+            name: "wuyangcherish",
+            age: 23
+        }
+    })
+</script>
+</html>

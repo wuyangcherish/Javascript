@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-click的点击事件</title>
+<script type="text/javascript" src="../js/angular.min.js"></script>
+<style type="text/css">
+    *{font-family: "Microsoft yahei"}
+    button{margin:0;padding:0;}
+    .btn{
+        width:100px;
+        height:50px;
+        line-height: 50px;
+        background: #9dd;
+        color:#fff;
+        font-size: 16px;
+        border:none;
+    }    
+</style>
+</head>
+<body>
+    <div class="parent" ng-controller="myController">
+        <h4>简单的加减计时</h4>
+        <button class="btn" ng-click="add(1)">Add</button>
+        <button class="btn" ng-click="sub(1)">Subtract</button>
+        <p>Current count :{{counter}}</p>
+    </div>
+    
+<script type="text/javascript">
+    var app = angular.module('myApp',[]);
+    
+    app.controller('myController', function($scope){
+        
+        //初始值
+        $scope.counter = 0;
+        
+        $scope.add = function(amount) {
+            $scope.counter += amount;
+        };
+        
+        $scope.sub = function(amount) {
+            $scope.counter -= amount;
+        }
+    })
+</script>
+</body>
+</html>
