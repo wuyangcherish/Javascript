@@ -1,0 +1,7 @@
+1. ng-controller: 是用来将业务逻辑区分的，所以比较推荐的是用业务逻辑划分 controller  做到业务的高内聚 controller 的单一原则 SPR 
+
+2. View 里面包含尽量少的逻辑    应该只是当成一个模板引擎
+
+3. 最好的实践模式则是把必须的dom，css操作移向angular的Directive，或者view中。在angularjs模式中只有directive和view才能出现dom和css的逻辑操作。
+
+4.controller应该只包含业务逻辑，对于数据模型的格式化过滤尽量交给angular框架filter等处理。
