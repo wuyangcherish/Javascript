@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时插件</title>
+</head>
+<body>
+<div class="countTime J_countCon">
+    <p>现在离结束时间还有:</p>
+    <span class="J_days">xx</span>天<span class="J_hours">xx</span>时<span class="J_minutes">xx</span>分<span class="J_seconds">xx</span>秒
+    <p class="show"></p>
+</div>
+</body>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="Countdown.js"></script>
+<script type="text/javascript"> 
+
+    $('.countTime').countTime({
+        endTime:'2016/03/31 11:40:00',
+        countCon: ".J_countCon",
+        info: "猜猜倒计时完了之后显示的是什么？"
+    });
+            
+</script>
+</html>
