@@ -1,0 +1,10 @@
+#container {
+  width: 300px;
+  height: 400px;
+  background-color: red;
+}
+#container #right {
+  float: right;
+  width: 100px;
+  height: 200px;
+}

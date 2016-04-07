@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+#con {
+  width: 600px;
+  height: 400px;
+}
+#con .left {
+  width: 200px;
+  height: 400px;
+  background-color: red;
+}
+#con .left .top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 200px;
+}
