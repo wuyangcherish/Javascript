@@ -58,3 +58,23 @@
 3. .node: C/C++ 编写的扩展文件。 通过 dlopen() 方法加载最后编译生成文件
 4. 其他扩展名文件都会被当做.js 文件载入
 
+###### JavaScript模块的编译：
+
+* 在编译的过程中, Node 会对获取到的JavaScript 进行一次包装 ，例如：
+<pre>
+	(function(exports, require, module, _filename, _dirname){
+		var math = require('math');
+		//...
+	})
+</pre>
+	
+这样每个模块文件之间都进行了作用于的隔离，包装之后的代码会通过 runInThisContext()方法执行，返回一个具体的function 对象。所以在咱们自己写的函数里面可以直接使用require() 等这些属性
+
+* exports && module.exports :
+	* exports对象是通过形参的方式传入的，直接赋值形参会改变形参的引用，但不能改变作用域外的值。如果要达到require() 引入一个类的效果，用 module.exports对象。
+		
+####### C/C++ 模块的编译
+
+* Node 调用process.dlopen()方法进行加载和执行的.Libuv对 该方法进行了平台的兼容性处理。
+* .node 模块文件不需要编译。因为他是编写 C/C++ 模块之后编译生成的，在执行的过程中，模块的exports对象与 .node 模块产生联系，然后返回给调用者。		
+
