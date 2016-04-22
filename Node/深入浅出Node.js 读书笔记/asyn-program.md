@@ -119,3 +119,11 @@ events 模块里面的不存在事件冒泡等等它具有 addListener/on(), onc
 	``promiseA 编程 推荐： promise 迷你书
 	``
 	链接地址：[http://liubin.org/promises-book/](http://liubin.org/promises-book/) 	
+	
+	
+	
+=====================
+
+未完成.....
+
+=====================
