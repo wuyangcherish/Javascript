@@ -1,14 +1,15 @@
 {
-  "name": "plugin",
+  "name": "package-example",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+{
+    "name": "lib",
+    "index":"index.js"
+},
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "mocha": "^2.4.5"
-  }
+  "license": "ISC"
 }
