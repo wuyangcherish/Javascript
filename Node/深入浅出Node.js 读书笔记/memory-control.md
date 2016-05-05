@@ -90,4 +90,41 @@
 	* 缓存
 	* 队列消费不及时
 	* 作用域未释放
- 
+	
+###### 大内存应用
+
+1. Node 中提供了原生模块 stream 来处理大文件
+	* 由于 v8 的内存限制，我们无法通过 <code>fs.readFile()</code> 和 <code>fs.writeFile() </code>直接进行大文件的操作，而改用<code>fs.createReadStream()</code> 和<code>fs.createWriteStream()</code> 方法通过流的方式实现对大文件的操作， 
+	
+2. Node stream 的4种流类型：
+	* Readable -> 可读操作
+	* Writeable -> 可写操作
+	* Duplex -> 可读写操作
+	* Transform -> 操作被写入数据然后读出结果
+3. 常用事件：
+	* data -> 当所有数据可读时触发
+	* end -> 没有更多的可读数据时被触发
+	* error -> 当接收和写入到底层系统时触发
+	* finish -> 所有的数据已被写入到底层系统时触发
+4. 从流中读取数据：
+	* 设置编码 然后读取 代码见：[/code/streamAct/readFile.js]
+	
+5. 写入数据：
+	* 设置编码 然后再write() 代码见：[/code/streamAct/writeFile.js]
+	
+6. 管道流：通常用于从一个流中获取数据并将数据传递到另一个流中
+	* 好比把一桶水通过管子引到另一桶水里面，实现大文件的复制
+	* 需要注意的是当把第一桶里面的文件内容输入到第二个桶里面的话，第二个桶里面原来的内容会被清空
+	
+7. 链式流：通过连接输出流到另一个流并创建多个对个流操作链的机制，链式流一般用于管道操作。例如下列的例子：
+<pre>
+	var fs = require("fs");
+	var zlib = require("zlib");
+	
+	//压缩 input 文件为 input.txt.gz
+	fs.createReadStream("input.txt")
+		.pipe(zlib.creatGizp())
+		.pipe(fs.createWriteStream("input.txt.gz"));
+	console.log("文件压缩完成~")
+</pre>
+
