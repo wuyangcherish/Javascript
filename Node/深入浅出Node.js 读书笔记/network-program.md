@@ -81,6 +81,37 @@ var socket = dgram.createSocket("udp4");
 
 #### WebSocket 服务
  
+###### WebSocket 相比较 HTTP 的好处
+1. 客户端与服务器端只建立一个 TCP 连接，可以使用更少的连接
+2. WebSocket 服务器端可以推送数据到客户端，
+3. 有更轻量级的协议头，减少数据的传送量
+<pre>
+var socket = new WebSocket("ws://127.0.0.1:12010/updates");
+socket.onopen = function(){
+	setInterval(function(){
+		if(socket.bufferedAmount == 0){
+			socket.send(getupdateData());
+		}
+	},50);
+};
+socket.onmessage = function(event){
+	//TODO ..event.data
+}
+</pre>
+上述的代码中，浏览器与服务器创建WebSocket请求，在请求完成后打开，每 50 毫秒向服务器端发送一次数据。通过 onmessage() 方法接收服务器端传来的数据。
+4. WebSocket 基于TCP 上定义独立的协议，跟 HTTP 没有太大的关系。主要有两个部分：握手和数据传输。
+
+###### WebSocket 握手
+* 客户端建立连接，通过 HTTP 发起报文请求。与普通的 HTTP 请求不同的是upgrade:websocket Connection: updrade. 该字段表示请求服务器升级协议为 websocket 
+* sec-websocket-key : 用于安全校验 是一个随机生成的Base64编码的字符串
+
+WebSocket 跟 Node 都是基于事件的编程接口，基于 JavaScript ，以封装良好的WebSocket 实现，，另外 Node 基于事件驱动的方式使得它对应对 WebScoket 这样的长连接应用场景可以轻松的处理大量并发请求。
+
+#### 网络服务与安全
+
+Node在网络安全上提供了3 个模块分别为 crypto tls https crypto 主要用于加密解密 SHA1,MD5等加密算法都有体现
+
+
 
 
 
