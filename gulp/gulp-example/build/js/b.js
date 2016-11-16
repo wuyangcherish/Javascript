@@ -1,1 +1,0 @@
-var name="wuyangcherish",age=23;console.log("hello");

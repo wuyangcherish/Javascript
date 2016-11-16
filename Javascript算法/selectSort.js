@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-<script type="text/javascript">
+
 var arr = [23,56,1,67,37,67,8989,0];
     /*
         每次都循环的是i之后的数字 如果有比min小的数字则将min跟该数字换一下 直到最后循环结束
@@ -28,5 +19,3 @@ function selectSort(arr){
     return arr;
 }
 selectSort(arr)
-</script>
-</html>

@@ -6,7 +6,7 @@
 */
 
 var selectSort = function(arr){
-    if(Object.prototype.toString.call(arr).slice(8,-1) === "array"){
+    if(Object.prototype.toString.call(arr) === "[object array]"){
         if(arr.length<=1){
             return arr;
         }
